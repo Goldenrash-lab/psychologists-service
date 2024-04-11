@@ -1,0 +1,38 @@
+@import url(../node_modules/modern-normalize/modern-normalize.css);
+@import url(../src/styles/fonts.css);
+@import url(../src/styles/variables.css);
+
+body {
+  font-family: Inter;
+  font-weight: 400;
+  font-size: 16px;
+  background-color: var(--white);
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p {
+  padding: 0;
+  margin: 0;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+  object-fit: cover;
+}
+
+ul,
+ol {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+a {
+  text-decoration: none;
+  color: inherit;
+}
