@@ -1,9 +1,11 @@
 import { NavLink } from "react-router-dom";
 import styled from "styled-components";
 
-export const HeaderStyled = styled.header`
+export const HeaderTag = styled.header`
   border-bottom: 1px solid rgba(25, 26, 21, 0.1);
 `;
+
+export const HeaderStyled = styled.div``;
 export const HeaderWrapper = styled.div`
   height: 96px;
   display: flex;
