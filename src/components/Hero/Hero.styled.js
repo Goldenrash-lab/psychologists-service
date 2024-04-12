@@ -60,6 +60,9 @@ export const HeroLeft = styled.div`
 export const HeroRight = styled.div``;
 export const HeroRightWrapper = styled.div`
   position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 `;
 export const HeroRightImg = styled.img``;
 export const HeroRightBox = styled.div`
