@@ -25,7 +25,7 @@ import StarSvg from "../../images/card/StarSvg";
 import HeartSvg from "../../images/card/HeartSvg";
 import { useState } from "react";
 import CardHiddenInfo from "../CardHiddenInfo/CardHiddenInfo";
-import { motion } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
 
 const PsychologistsItem = () => {
   const [activeComment, setActiveComment] = useState(false);
@@ -103,21 +103,23 @@ const PsychologistsItem = () => {
           better mental health.
         </CardDescribe>
 
-        {activeComment ? (
-          <>
-            <motion.div
-              initial={{ opacity: 0, y: -200 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.3 }}
-            >
-              <CardHiddenInfo />
-            </motion.div>
-          </>
-        ) : (
-          <CardButtonMore type="button" onClick={showComments}>
-            Read more
-          </CardButtonMore>
-        )}
+        <AnimatePresence>
+          {activeComment ? (
+            <>
+              <motion.div
+                initial={{ opacity: 0, height: 0 }}
+                animate={{ opacity: 1, height: "auto" }}
+                transition={{ duration: 0.3 }}
+              >
+                <CardHiddenInfo />
+              </motion.div>
+            </>
+          ) : (
+            <CardButtonMore type="button" onClick={showComments}>
+              Read more
+            </CardButtonMore>
+          )}
+        </AnimatePresence>
       </CardContent>
     </CardItem>
   );
