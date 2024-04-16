@@ -7,6 +7,7 @@ import {
   CardContent,
   CardDescribe,
   CardHead,
+  CardHeadHeart,
   CardHeadItem,
   CardHeadList,
   CardHeadPrice,
@@ -24,8 +25,6 @@ import StarSvg from "../../images/card/StarSvg";
 import HeartSvg from "../../images/card/HeartSvg";
 import { useState } from "react";
 import CardHiddenInfo from "../CardHiddenInfo/CardHiddenInfo";
-
-import { CSSTransition } from "react-transition-group";
 import { motion } from "framer-motion";
 
 const PsychologistsItem = () => {
@@ -57,7 +56,9 @@ const PsychologistsItem = () => {
               </CardHeadText>
             </CardHeadItem>
             <CardHeadItem>
-              <HeartSvg />
+              <CardHeadHeart type="button">
+                <HeartSvg />
+              </CardHeadHeart>
             </CardHeadItem>
           </CardHeadList>
         </CardHead>
@@ -102,7 +103,7 @@ const PsychologistsItem = () => {
           better mental health.
         </CardDescribe>
 
-        {activeComment && (
+        {activeComment ? (
           <>
             <motion.div
               initial={{ opacity: 0, y: -200 }}
@@ -112,9 +113,7 @@ const PsychologistsItem = () => {
               <CardHiddenInfo />
             </motion.div>
           </>
-        )}
-
-        {!activeComment && (
+        ) : (
           <CardButtonMore type="button" onClick={showComments}>
             Read more
           </CardButtonMore>

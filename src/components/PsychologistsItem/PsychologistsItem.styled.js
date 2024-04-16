@@ -29,9 +29,7 @@ export const CardImgBox = styled.div`
 export const CardImg = styled.img`
   border-radius: 15px;
 `;
-export const CardContent = styled.div`
-  transition: all 4s;
-`;
+export const CardContent = styled.div``;
 export const CardHead = styled.div`
   display: flex;
   justify-content: space-between;
@@ -113,4 +111,19 @@ export const CardButtonMore = styled.button`
   color: #191a15;
   cursor: pointer;
   text-underline-offset: 2px;
+`;
+
+export const CardHeadHeart = styled.button`
+  cursor: pointer;
+  background-color: transparent;
+  border: none;
+
+  &:hover {
+    svg {
+      fill: var(--green);
+      path {
+        stroke: var(--green);
+      }
+    }
+  }
 `;

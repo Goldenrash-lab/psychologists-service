@@ -21,30 +21,54 @@ const Filters = () => {
           }}
           options={options}
           placeholder="A to Z"
+          defaultValue={options[0]}
           styles={{
             control: (baseStyles, state) => ({
               ...baseStyles,
-              borderColor: state.isFocused
-                ? "var(--light-green)"
-                : "transparent",
               backgroundColor: "var(--green)",
-              color: "var(--white)",
+
+              boxShadow: state.isFocused ? "var(--green)" : "var(--green)",
               borderRadius: "14px",
               height: "48px",
+              cursor: "pointer",
+              borderColor: "var(--light-green)",
+              ":hover": {
+                borderColor: "var(--green)",
+              },
+              caretColor: "transparent",
             }),
-            dropdownIndicator: (s) => ({
-              ...s,
+            singleValue: (b) => ({
+              ...b,
               color: "var(--white)",
             }),
-            option: (b) => ({
+            dropdownIndicator: (b, s) => ({
               ...b,
-              color: "var(--black)",
+              color: s.isFocused ? "var(--white)" : "var(--white)",
+              ":hover": {
+                color: "var(--white)",
+              },
+            }),
+            option: (b, s) => ({
+              ...b,
+              color: !s.isSelected ? "rgba(25, 26, 21, 0.3)" : "var(--black)",
+              backgroundColor: s.isFocused
+                ? "rgba(84, 190, 150, 0.2)"
+                : "var(--white)",
+              boxShadow: s.isFocused
+                ? "rgba(84, 190, 150, 0.2)"
+                : "var(--white)",
               cursor: "pointer",
+
+              ":active": {
+                backgroundColor: s.isSelected
+                  ? "rgba(84, 190, 150, 0.2)"
+                  : "rgba(84, 190, 150, 0.2)",
+              },
             }),
             menu: (styles) => ({
               ...styles,
               borderRadius: "14px",
-              color: "var(--white)",
+              // color: "red",
             }),
             placeholder: (defaultStyles) => ({
               ...defaultStyles,

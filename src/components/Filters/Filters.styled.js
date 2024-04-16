@@ -15,6 +15,8 @@ export const FilterSelect = styled(Select)`
   font-weight: 500;
   color: #8a8a89;
   margin-top: 8px;
+  border: none;
+  cursor: pointer;
 `;
 // export const FiltersWrapper = styled.div`
 

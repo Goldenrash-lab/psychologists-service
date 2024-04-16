@@ -50,6 +50,8 @@ export const CardHiddenBoxBtn = styled.button`
   border-radius: 30px;
   background-color: var(--green);
   border: none;
+  cursor: pointer;
+  transition: all 0.3s;
   &:hover {
     background-color: var(--hover-green);
   }
