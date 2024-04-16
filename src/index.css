@@ -36,3 +36,17 @@ a {
   text-decoration: none;
   color: inherit;
 }
+
+.active {
+  position: relative;
+  &::before {
+    content: "";
+    position: absolute;
+    bottom: -8px;
+    background-color: var(--green);
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    left: 47%;
+  }
+}
