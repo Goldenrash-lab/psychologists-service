@@ -4,6 +4,7 @@ import Header from "../Header/Header";
 import { HeaderTag } from "../Header/Header.styled";
 import styled from "styled-components";
 import IMG from "/HeroBackGradient.png?url";
+import ModalLogin from "../ModalLogin/ModalLogin";
 
 const Background = styled.div`
   background-image: url(${IMG});
@@ -30,6 +31,7 @@ const Layout = () => {
           <Outlet />
         </Container>
       </main>
+      <ModalLogin />
     </>
   );
 };
