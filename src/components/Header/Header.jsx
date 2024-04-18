@@ -13,7 +13,7 @@ import {
   RegBtn,
 } from "./Header.styled";
 
-const Header = () => {
+const Header = ({ setModalLogin, setModalSignUp }) => {
   return (
     <HeaderStyled>
       <HeaderWrapper>
@@ -27,10 +27,18 @@ const Header = () => {
           </Nav>
         </LogoNavWrapper>
         <HeaderBtnWrapper>
-          <LoginBtn type="button" aria-label="login">
+          <LoginBtn
+            type="button"
+            aria-label="login"
+            onClick={() => setModalLogin(true)}
+          >
             Log In
           </LoginBtn>
-          <RegBtn type="button" aria-label="registration">
+          <RegBtn
+            type="button"
+            aria-label="registration"
+            onClick={() => setModalSignUp(true)}
+          >
             Registration
           </RegBtn>
         </HeaderBtnWrapper>

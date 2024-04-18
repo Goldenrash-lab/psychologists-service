@@ -1,6 +1,4 @@
 import { useEffect, useRef, useState } from "react";
-import CloseSvg from "../../images/modal/CloseSvg";
-import EyeCloseSvg from "../../images/modal/EyeCloseSvg";
 import {
   Backdrop,
   CloseBtn,
@@ -12,10 +10,12 @@ import {
   ModalLabel,
   ModalText,
   ModalTitle,
-} from "./ModalLogin.styled";
+} from "../ModalLogin/ModalLogin.styled";
+import CloseSvg from "../../images/modal/CloseSvg";
 import EyeOpenSvg from "../../images/modal/EyeOpenSvg";
+import EyeCloseSvg from "../../images/modal/EyeCloseSvg";
 
-const ModalLogin = ({ setModal }) => {
+const ModalSignUp = ({ setModal }) => {
   const [eye, setEye] = useState(true);
   const ref = useRef();
 
@@ -49,12 +49,16 @@ const ModalLogin = ({ setModal }) => {
           >
             <CloseSvg />
           </CloseBtn>
-          <ModalTitle>Log In</ModalTitle>
+          <ModalTitle>Registration</ModalTitle>
           <ModalText>
-            Welcome back! Please enter your credentials to access your account
-            and continue your search for a psychologist.
+            Thank you for your interest in our platform! In order to register,
+            we need some information. Please provide us with the following
+            information.
           </ModalText>
           <ModalForm>
+            <ModalLabel>
+              <ModalInput type="text" placeholder="Name" name="name" />
+            </ModalLabel>
             <ModalLabel>
               <ModalInput type="text" placeholder="Email" name="email" />
             </ModalLabel>
@@ -69,7 +73,7 @@ const ModalLogin = ({ setModal }) => {
                 id="password"
               />
             </ModalLabel>
-            <ModalButton type="submit">Log In</ModalButton>
+            <ModalButton type="submit">Sign Up</ModalButton>
           </ModalForm>
         </Modal>
       </Backdrop>
@@ -77,4 +81,4 @@ const ModalLogin = ({ setModal }) => {
   );
 };
 
-export default ModalLogin;
+export default ModalSignUp;

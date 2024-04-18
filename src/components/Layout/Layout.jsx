@@ -1,29 +1,26 @@
 import { Outlet, useLocation } from "react-router-dom";
-import { Container } from "./Layout.styled";
+import { Background, Container } from "./Layout.styled";
 import Header from "../Header/Header";
 import { HeaderTag } from "../Header/Header.styled";
-import styled from "styled-components";
-import IMG from "/HeroBackGradient.png?url";
 import ModalLogin from "../ModalLogin/ModalLogin";
-
-const Background = styled.div`
-  background-image: url(${IMG});
-  background-size: cover;
-  background-repeat: no-repeat;
-  min-height: 100vh;
-  position: absolute;
-  z-index: -1;
-  width: 100vw;
-`;
+import { useState } from "react";
+import ModalSignUp from "../ModalSignUp/ModalSignUp";
 
 const Layout = () => {
   const location = useLocation();
+
+  const [modalLogin, setModalLogin] = useState(false);
+  const [modalSignUp, setModalSignUp] = useState(false);
+
   return (
     <>
       {location.pathname === "/" && <Background />}
       <HeaderTag>
         <Container>
-          <Header />
+          <Header
+            setModalLogin={setModalLogin}
+            setModalSignUp={setModalSignUp}
+          />
         </Container>
       </HeaderTag>
       <main>
@@ -31,7 +28,8 @@ const Layout = () => {
           <Outlet />
         </Container>
       </main>
-      <ModalLogin />
+      {modalLogin && <ModalLogin setModal={setModalLogin} />}
+      {modalSignUp && <ModalSignUp setModal={setModalSignUp} />}
     </>
   );
 };

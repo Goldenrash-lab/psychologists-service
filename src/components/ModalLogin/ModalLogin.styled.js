@@ -20,6 +20,7 @@ export const Modal = styled.div`
   border-radius: 30px;
   padding: 64px;
   position: relative;
+  z-index: 9999;
 `;
 export const ModalTitle = styled.h2`
   font-weight: 500;
@@ -84,6 +85,8 @@ export const ModalButton = styled.button`
   color: var(--white);
   cursor: pointer;
   transition: all 0.3s;
+  max-width: 438px;
+  white-space: nowrap;
 
   &:hover {
     background-color: var(--hover-green);
