@@ -15,11 +15,16 @@ import {
 } from "./ModalLogin.styled";
 import EyeOpenSvg from "../../images/modal/EyeOpenSvg";
 import { useForm } from "react-hook-form";
+import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
+import { useDispatch } from "react-redux";
+import { toast } from "react-toastify";
+import { login } from "../../store/auth/slice";
 
 const ModalLogin = ({ setModal }) => {
   const [eye, setEye] = useState(false);
   const ref = useRef();
   const { register, handleSubmit } = useForm();
+  const dispatch = useDispatch();
 
   useEffect(() => {
     function closeOnESC(e) {
@@ -40,8 +45,28 @@ const ModalLogin = ({ setModal }) => {
     }
   }
 
-  function onSubmit(data) {
-    console.log(data);
+  function onSubmit({ email, password }) {
+    const auth = getAuth();
+    signInWithEmailAndPassword(auth, email, password)
+      .then(({ user }) => {
+        console.log(user);
+        dispatch(
+          login({
+            user: {
+              email: user.email,
+              id: user.uid,
+            },
+            token: user.accessToken,
+          })
+        );
+
+        setModal(false);
+        toast.success("Welcome!");
+      })
+      .catch((error) => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+      });
   }
 
   return (

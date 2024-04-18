@@ -15,11 +15,16 @@ import CloseSvg from "../../images/modal/CloseSvg";
 import EyeOpenSvg from "../../images/modal/EyeOpenSvg";
 import EyeCloseSvg from "../../images/modal/EyeCloseSvg";
 import { useForm } from "react-hook-form";
+import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
+import { useDispatch } from "react-redux";
+import { signUp } from "../../store/auth/slice";
+import { toast } from "react-toastify";
 
 const ModalSignUp = ({ setModal }) => {
   const [eye, setEye] = useState(false);
   const ref = useRef();
   const { register, handleSubmit } = useForm();
+  const dispatch = useDispatch();
 
   function clickBackdrop(e) {
     if (e.target === ref.current) {
@@ -39,8 +44,29 @@ const ModalSignUp = ({ setModal }) => {
     };
   }, [setModal]);
 
-  function onSubmit(data) {
-    console.log(data);
+  function onSubmit({ email, password }) {
+    const auth = getAuth();
+    createUserWithEmailAndPassword(auth, email, password)
+      .then(({ user }) => {
+        console.log(user);
+        dispatch(
+          signUp({
+            user: {
+              email: user.email,
+              id: user.uid,
+            },
+            token: user.accessToken,
+          })
+        );
+
+        setModal(false);
+        toast.success("Welcome!");
+      })
+      .catch((error) => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        // ..
+      });
   }
 
   return (
