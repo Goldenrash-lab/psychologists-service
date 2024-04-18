@@ -14,10 +14,12 @@ import {
 import CloseSvg from "../../images/modal/CloseSvg";
 import EyeOpenSvg from "../../images/modal/EyeOpenSvg";
 import EyeCloseSvg from "../../images/modal/EyeCloseSvg";
+import { useForm } from "react-hook-form";
 
 const ModalSignUp = ({ setModal }) => {
-  const [eye, setEye] = useState(true);
+  const [eye, setEye] = useState(false);
   const ref = useRef();
+  const { register, handleSubmit } = useForm();
 
   function clickBackdrop(e) {
     if (e.target === ref.current) {
@@ -37,6 +39,10 @@ const ModalSignUp = ({ setModal }) => {
     };
   }, [setModal]);
 
+  function onSubmit(data) {
+    console.log(data);
+  }
+
   return (
     <>
       <Backdrop ref={ref} onClick={clickBackdrop}>
@@ -55,18 +61,29 @@ const ModalSignUp = ({ setModal }) => {
             we need some information. Please provide us with the following
             information.
           </ModalText>
-          <ModalForm>
+          <ModalForm onSubmit={handleSubmit(onSubmit)}>
             <ModalLabel>
-              <ModalInput type="text" placeholder="Name" name="name" />
+              <ModalInput
+                {...register("name")}
+                type="text"
+                placeholder="Name"
+                name="name"
+              />
             </ModalLabel>
             <ModalLabel>
-              <ModalInput type="text" placeholder="Email" name="email" />
+              <ModalInput
+                {...register("email")}
+                type="text"
+                placeholder="Email"
+                name="email"
+              />
             </ModalLabel>
             <ModalLabel htmlFor="password">
               <ModalEyeBtn type="button" onClick={() => setEye(!eye)}>
                 {eye ? <EyeOpenSvg /> : <EyeCloseSvg />}
               </ModalEyeBtn>
               <ModalInput
+                {...register("password")}
                 type={eye ? "text" : "password"}
                 placeholder="Password"
                 name="password"

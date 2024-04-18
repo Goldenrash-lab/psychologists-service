@@ -14,16 +14,13 @@ import {
   ModalTitle,
 } from "./ModalLogin.styled";
 import EyeOpenSvg from "../../images/modal/EyeOpenSvg";
+import { useForm } from "react-hook-form";
 
 const ModalLogin = ({ setModal }) => {
-  const [eye, setEye] = useState(true);
+  const [eye, setEye] = useState(false);
   const ref = useRef();
+  const { register, handleSubmit } = useForm();
 
-  function clickBackdrop(e) {
-    if (e.target === ref.current) {
-      setModal(false);
-    }
-  }
   useEffect(() => {
     function closeOnESC(e) {
       if (e.key === "Escape") {
@@ -36,6 +33,16 @@ const ModalLogin = ({ setModal }) => {
       document.removeEventListener("keydown", closeOnESC);
     };
   }, [setModal]);
+
+  function clickBackdrop(e) {
+    if (e.target === ref.current) {
+      setModal(false);
+    }
+  }
+
+  function onSubmit(data) {
+    console.log(data);
+  }
 
   return (
     <>
@@ -54,15 +61,21 @@ const ModalLogin = ({ setModal }) => {
             Welcome back! Please enter your credentials to access your account
             and continue your search for a psychologist.
           </ModalText>
-          <ModalForm>
+          <ModalForm onSubmit={handleSubmit(onSubmit)}>
             <ModalLabel>
-              <ModalInput type="text" placeholder="Email" name="email" />
+              <ModalInput
+                {...register("email")}
+                type="text"
+                placeholder="Email"
+                name="email"
+              />
             </ModalLabel>
             <ModalLabel htmlFor="password">
               <ModalEyeBtn type="button" onClick={() => setEye(!eye)}>
                 {eye ? <EyeOpenSvg /> : <EyeCloseSvg />}
               </ModalEyeBtn>
               <ModalInput
+                {...register("password")}
                 type={eye ? "text" : "password"}
                 placeholder="Password"
                 name="password"
