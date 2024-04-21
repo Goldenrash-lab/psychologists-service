@@ -67,7 +67,7 @@ const Header = ({ setModalLogin, setModalSignUp }) => {
             <>
               <HeaderAvatarBox>
                 <DefaultAvatarSvg />
-                <HeaderUsername>UserName</HeaderUsername>
+                <HeaderUsername>{user?.email ?? "username"}</HeaderUsername>
               </HeaderAvatarBox>
               <LogOutBtn
                 type="button"
