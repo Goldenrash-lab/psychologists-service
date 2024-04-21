@@ -64,7 +64,9 @@ export const HeroRightWrapper = styled.div`
   justify-content: center;
   align-items: center;
 `;
-export const HeroRightImg = styled.img``;
+export const HeroRightImg = styled.img`
+  border-radius: 10px;
+`;
 export const HeroRightBox = styled.div`
   background-color: var(--green);
   padding: 32px;

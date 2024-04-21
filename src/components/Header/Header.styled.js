@@ -74,3 +74,31 @@ export const RegBtn = styled.button`
     background-color: var(--hover-green);
   }
 `;
+
+export const LogOutBtn = styled.button`
+  padding: 14px 40px;
+  border: 1px solid rgba(25, 26, 21, 0.2);
+  border-radius: 30px;
+  width: 135px;
+  height: 48px;
+  white-space: nowrap;
+  font-weight: 500;
+  line-height: 125%;
+  letter-spacing: -0.01em;
+  color: var(--black);
+  display: flex;
+  place-items: center;
+  background-color: transparent;
+  cursor: pointer;
+`;
+export const HeaderAvatarBox = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-right: 28px;
+`;
+export const HeaderUsername = styled.p`
+  line-height: 125%;
+  letter-spacing: -0.01em;
+  font-weight: 500;
+`;
