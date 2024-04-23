@@ -3,10 +3,11 @@ import { Background, Container } from "./Layout.styled";
 import Header from "../Header/Header";
 import { HeaderTag } from "../Header/Header.styled";
 import ModalLogin from "../ModalLogin/ModalLogin";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import ModalSignUp from "../ModalSignUp/ModalSignUp";
 
 import { AnimatePresence, motion } from "framer-motion";
+import { getAuth } from "firebase/auth";
 
 const Layout = () => {
   const location = useLocation();

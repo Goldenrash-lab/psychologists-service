@@ -20,13 +20,16 @@ import { selectUser } from "../../store/auth/selectors";
 import { logout } from "../../store/auth/slice";
 import { toast } from "react-toastify";
 import DefaultAvatarSvg from "../../images/defaultAvatarSvg";
+import { getAuth, signOut } from "firebase/auth";
 
 const Header = ({ setModalLogin, setModalSignUp }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const user = useSelector(selectUser);
 
-  function handleLogOut() {
+  async function handleLogOut() {
+    const auth = getAuth();
+    await signOut(auth);
     dispatch(logout());
     toast.info("Bye bye!");
     navigate("/");

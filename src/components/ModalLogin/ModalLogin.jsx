@@ -49,7 +49,7 @@ const ModalLogin = ({ setModal }) => {
     const auth = getAuth();
     signInWithEmailAndPassword(auth, email, password)
       .then(({ user }) => {
-        console.log(user);
+        // console.log(user);
         dispatch(
           login({
             user: {

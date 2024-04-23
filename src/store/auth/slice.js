@@ -20,6 +20,10 @@ const authSlice = createSlice({
       state.user = null;
       state.token = "";
     },
+    current: (state, { payload }) => {
+      state.user = payload.user;
+      state.token = payload.token;
+    },
   },
   extraReducers: (builder) => {
     // builder.addCase();
@@ -27,4 +31,4 @@ const authSlice = createSlice({
 });
 
 export const authReducer = authSlice.reducer;
-export const { signUp, login, logout } = authSlice.actions;
+export const { signUp, login, logout, current } = authSlice.actions;
