@@ -1,13 +1,17 @@
+import { nanoid } from "nanoid";
 import PsychologistsItem from "../PsychologistsItem/PsychologistsItem";
 import { StyledList } from "./PsychologistsList.styled";
 
-const PsychologistsList = () => {
+const PsychologistsList = ({ data }) => {
+  console.log(data);
   return (
-    <StyledList>
-      <PsychologistsItem />
-      <PsychologistsItem />
-      <PsychologistsItem />
-    </StyledList>
+    <>
+      <StyledList>
+        {data?.map((el) => (
+          <PsychologistsItem key={nanoid()} info={el} />
+        ))}
+      </StyledList>
+    </>
   );
 };
 

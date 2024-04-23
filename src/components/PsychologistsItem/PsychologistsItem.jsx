@@ -27,17 +27,29 @@ import { useState } from "react";
 import CardHiddenInfo from "../CardHiddenInfo/CardHiddenInfo";
 import { AnimatePresence, motion } from "framer-motion";
 
-const PsychologistsItem = () => {
+const PsychologistsItem = ({ info }) => {
   const [activeComment, setActiveComment] = useState(false);
   function showComments() {
     setActiveComment(!activeComment);
   }
+  const {
+    about,
+    avatar_url,
+    experience,
+    initial_consultation,
+    license,
+    name,
+    price_per_hour,
+    rating,
+    reviews,
+    specialization,
+  } = info;
 
   return (
     <CardItem>
       <CardImgBox>
         <OnlineSvg />
-        <CardImg src={womanImg} alt="woman card" />
+        <CardImg src={avatar_url} alt={name} />
       </CardImgBox>
 
       <CardContent>
@@ -47,12 +59,12 @@ const PsychologistsItem = () => {
             <CardHeadItem>
               <StarSvg />
               <CardHeadText>
-                Rating: <CardHeadRate>4.75</CardHeadRate>
+                Rating: <CardHeadRate>{rating}</CardHeadRate>
               </CardHeadText>
             </CardHeadItem>
             <CardHeadItem>
               <CardHeadText>
-                Price / 1 hour: <CardHeadPrice>120$</CardHeadPrice>
+                Price / 1 hour: <CardHeadPrice>{price_per_hour}$</CardHeadPrice>
               </CardHeadText>
             </CardHeadItem>
             <CardHeadItem>
@@ -62,46 +74,34 @@ const PsychologistsItem = () => {
             </CardHeadItem>
           </CardHeadList>
         </CardHead>
-        <CardTitle>Dr. Sarah Davis</CardTitle>
+        <CardTitle>{name}</CardTitle>
         <CardBenefitsList>
           <CardBenefitsItem>
             <CardBenefitsLabel>
               Experience:
-              <CardBenefitsText>12 years</CardBenefitsText>
+              <CardBenefitsText>{experience}</CardBenefitsText>
             </CardBenefitsLabel>
           </CardBenefitsItem>
           <CardBenefitsItem>
             <CardBenefitsLabel>
               License:
-              <CardBenefitsText>
-                Licensed Psychologist (License #67890)
-              </CardBenefitsText>
+              <CardBenefitsText>{license}</CardBenefitsText>
             </CardBenefitsLabel>
           </CardBenefitsItem>
           <CardBenefitsItem>
             <CardBenefitsLabel>
               Specialization:
-              <CardBenefitsText>Depression and Mood Disorders</CardBenefitsText>
+              <CardBenefitsText>{specialization}</CardBenefitsText>
             </CardBenefitsLabel>
           </CardBenefitsItem>
           <CardBenefitsItem>
             <CardBenefitsLabel>
               Initial_consultation:
-              <CardBenefitsText>
-                Free 45-minute initial consultation
-              </CardBenefitsText>
+              <CardBenefitsText>{initial_consultation}</CardBenefitsText>
             </CardBenefitsLabel>
           </CardBenefitsItem>
         </CardBenefitsList>
-        <CardDescribe>
-          Dr. Sarah Davis is a highly experienced and licensed psychologist
-          specializing in Depression and Mood Disorders. With 12 years of
-          practice, she has helped numerous individuals overcome their
-          depression and regain control of their lives. Dr. Davis is known for
-          her empathetic and understanding approach to therapy, making her
-          clients feel comfortable and supported throughout their journey to
-          better mental health.
-        </CardDescribe>
+        <CardDescribe>{about}</CardDescribe>
 
         <AnimatePresence>
           {activeComment ? (
@@ -111,7 +111,7 @@ const PsychologistsItem = () => {
                 animate={{ opacity: 1, height: "auto" }}
                 transition={{ duration: 0.3 }}
               >
-                <CardHiddenInfo />
+                <CardHiddenInfo reviews={reviews} />
               </motion.div>
             </>
           ) : (

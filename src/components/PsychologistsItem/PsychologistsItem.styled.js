@@ -65,7 +65,9 @@ export const CardHeadText = styled.p`
   line-height: 150%;
 `;
 export const CardHeadRate = styled.span``;
-export const CardHeadPrice = styled.span``;
+export const CardHeadPrice = styled.span`
+  color: #38cd3e;
+`;
 
 export const CardTitle = styled.h3`
   font-size: 24px;
