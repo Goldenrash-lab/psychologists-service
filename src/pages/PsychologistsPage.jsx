@@ -1,25 +1,67 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import Filters from "../components/Filters/Filters";
 import PsychologistsList from "../components/PsychologistsList/PsychologistsList";
-import { getDatabase, ref, onValue } from "firebase/database";
+import {
+  getDatabase,
+  ref,
+  onValue,
+  orderByKey,
+  startAfter,
+  startAt,
+} from "firebase/database";
+import { query, limitToFirst } from "firebase/database";
+import {
+  LoadMoreBtn,
+  LoadWrapper,
+} from "../components/PsychologistsList/PsychologistsList.styled";
+
+const LIMIT = 3;
 
 const PsychologistsPage = () => {
   const [dataFromDB, setDataFromDB] = useState(null);
+  const [prevData, setPrevData] = useState(LIMIT);
+  const [page, setPage] = useState(1);
 
-  useEffect(() => {
+  const fetchData = useCallback(() => {
     const db = getDatabase();
-    const starCountRef = ref(db);
-    onValue(starCountRef, (snapshot) => {
+
+    const countRef = query(
+      ref(db, "psychologists"),
+      limitToFirst(LIMIT * page)
+    );
+    onValue(countRef, (snapshot) => {
       const data = snapshot.val();
       setDataFromDB(data);
     });
-  }, []);
+  }, [page]);
+
+  useEffect(() => {
+    if (page) {
+      fetchData();
+    }
+  }, [fetchData, page]);
+
+  function handleClick() {
+    setPage(page + 1);
+    setPrevData(prevData + 3);
+  }
+  console.log("====================================");
+  console.log(prevData);
+  console.log(dataFromDB);
+  console.log("====================================");
 
   return (
-    <div>
+    <>
       <Filters />
       <PsychologistsList data={dataFromDB} />
-    </div>
+      {prevData % dataFromDB?.length === 0 && (
+        <LoadWrapper>
+          <LoadMoreBtn type="button" onClick={handleClick}>
+            Load more
+          </LoadMoreBtn>
+        </LoadWrapper>
+      )}
+    </>
   );
 };
 

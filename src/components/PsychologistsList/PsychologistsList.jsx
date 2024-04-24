@@ -1,13 +1,23 @@
 import { nanoid } from "nanoid";
 import PsychologistsItem from "../PsychologistsItem/PsychologistsItem";
 import { StyledList } from "./PsychologistsList.styled";
+import { useEffect, useState } from "react";
 
 const PsychologistsList = ({ data }) => {
-  console.log(data);
+  const [dataArray, setDataArray] = useState([]);
+
+  useEffect(() => {
+    if (data && !Array.isArray(data)) {
+      setDataArray(Object.values(data).map((el) => el));
+    } else {
+      setDataArray(data);
+    }
+  }, [data]);
+
   return (
     <>
       <StyledList>
-        {data?.map((el) => (
+        {dataArray?.map((el) => (
           <PsychologistsItem key={nanoid()} info={el} />
         ))}
       </StyledList>
