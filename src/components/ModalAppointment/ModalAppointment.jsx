@@ -47,7 +47,7 @@ const ModalAppointment = ({ setModal }) => {
   function onSubmit() {}
 
   if (!user) {
-    return <ModalPleaseLogin />;
+    return <ModalPleaseLogin setModal={setModal} />;
   }
 
   return (

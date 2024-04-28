@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useRef } from "react";
 import {
   Backdrop,
   CloseBtn,
@@ -11,11 +11,17 @@ import CloseSvg from "../../images/modal/CloseSvg";
 import { LoginBtn, RegBtn } from "../Header/Header.styled";
 import { ModalPleaseBox } from "./ModalPleaseLogin.styled";
 
-const ModalPleaseLogin = () => {
+const ModalPleaseLogin = ({ setModal }) => {
+  const ref = useRef();
+  function clickBackdrop(e) {
+    if (e.target === ref.current) {
+      setModal(false);
+    }
+  }
   return (
-    <Backdrop>
+    <Backdrop ref={ref} onClick={clickBackdrop}>
       <Modal>
-        <CloseBtn type="button">
+        <CloseBtn type="button" onClick={() => setModal(false)}>
           <CloseSvg />
         </CloseBtn>
         <ModalTitle>Please log in or register</ModalTitle>
@@ -23,11 +29,7 @@ const ModalPleaseLogin = () => {
           This functionality is available only to authorized users
         </ModalText>
         <ModalPleaseBox>
-          <LoginBtn
-            type="button"
-            aria-label="login"
-            // onClick={() => setModalLogin(true)}
-          >
+          <LoginBtn type="button" aria-label="login">
             Log In
           </LoginBtn>
           <RegBtn
