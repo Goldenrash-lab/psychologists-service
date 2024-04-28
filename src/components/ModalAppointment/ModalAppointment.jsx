@@ -16,10 +16,14 @@ import {
   ModalTextArea,
 } from "./ModalAppointment.styled";
 import { useEffect, useRef } from "react";
+import { useSelector } from "react-redux";
+import { selectUser } from "../../store/auth/selectors";
+import ModalPleaseLogin from "../ModalPleaseLogin/ModalPleaseLogin";
 
 const ModalAppointment = ({ setModal }) => {
   const { register, handleSubmit } = useForm();
   const ref = useRef();
+  const user = useSelector(selectUser);
 
   useEffect(() => {
     function closeOnESC(e) {
@@ -41,6 +45,10 @@ const ModalAppointment = ({ setModal }) => {
   }
 
   function onSubmit() {}
+
+  if (!user) {
+    return <ModalPleaseLogin />;
+  }
 
   return (
     <Backdrop ref={ref} onClick={clickBackdrop}>
