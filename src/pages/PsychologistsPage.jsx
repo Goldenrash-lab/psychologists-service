@@ -1,14 +1,7 @@
 import { useCallback, useEffect, useState } from "react";
 import Filters from "../components/Filters/Filters";
 import PsychologistsList from "../components/PsychologistsList/PsychologistsList";
-import {
-  getDatabase,
-  ref,
-  onValue,
-  orderByKey,
-  startAfter,
-  startAt,
-} from "firebase/database";
+import { getDatabase, ref, onValue } from "firebase/database";
 import { query, limitToFirst } from "firebase/database";
 import {
   LoadMoreBtn,
@@ -45,10 +38,6 @@ const PsychologistsPage = () => {
     setPage(page + 1);
     setPrevData(prevData + 3);
   }
-  console.log("====================================");
-  console.log(prevData);
-  console.log(dataFromDB);
-  console.log("====================================");
 
   return (
     <>

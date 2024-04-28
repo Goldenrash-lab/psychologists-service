@@ -63,10 +63,7 @@ const ModalLogin = ({ setModal }) => {
         setModal(false);
         toast.success("Welcome!");
       })
-      .catch((error) => {
-        const errorCode = error.code;
-        const errorMessage = error.message;
-      });
+      .catch(() => {});
   }
 
   return (

@@ -28,12 +28,19 @@ export const ModalTitle = styled.h2`
   line-height: 120%;
   letter-spacing: -0.02em;
   margin-bottom: 20px;
+
+  &[data-appointment=""] {
+    max-width: 472px;
+  }
 `;
 export const ModalText = styled.p`
   line-height: 125%;
   color: rgba(25, 26, 21, 0.5);
   margin-bottom: 40px;
   max-width: 438px;
+  &[data-appointment=""] {
+    max-width: 472px;
+  }
 `;
 export const ModalForm = styled.form`
   display: flex;
@@ -90,6 +97,9 @@ export const ModalButton = styled.button`
 
   &:hover {
     background-color: var(--hover-green);
+  }
+  &[data-appointment=""] {
+    max-width: 472px;
   }
 `;
 

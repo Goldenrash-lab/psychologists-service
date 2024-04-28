@@ -15,7 +15,7 @@ import {
 import unknown from "../../images/card/unknown.png";
 import { nanoid } from "nanoid";
 
-const CardHiddenInfo = ({ reviews }) => {
+const CardHiddenInfo = ({ reviews, setModal }) => {
   return (
     <CardHiddenBox>
       <CardHiddenBoxList>
@@ -34,7 +34,9 @@ const CardHiddenInfo = ({ reviews }) => {
           </CardHiddenBoxItem>
         ))}
       </CardHiddenBoxList>
-      <CardHiddenBoxBtn type="button">Make an appointment</CardHiddenBoxBtn>
+      <CardHiddenBoxBtn type="button" onClick={() => setModal(true)}>
+        Make an appointment
+      </CardHiddenBoxBtn>
     </CardHiddenBox>
   );
 };
