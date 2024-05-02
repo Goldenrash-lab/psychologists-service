@@ -26,10 +26,12 @@ import { useState } from "react";
 import CardHiddenInfo from "../CardHiddenInfo/CardHiddenInfo";
 import { AnimatePresence, motion } from "framer-motion";
 import ModalAppointment from "../ModalAppointment/ModalAppointment";
+const favArray = JSON.parse(localStorage.getItem("favorites")) ?? [];
 
 const PsychologistsItem = ({ info }) => {
   const [activeComment, setActiveComment] = useState(false);
   const [modal, setModal] = useState(false);
+  const [heart, setHeart] = useState(false);
   function showComments() {
     setActiveComment(!activeComment);
   }
@@ -43,9 +45,25 @@ const PsychologistsItem = ({ info }) => {
     name,
     price_per_hour,
     rating,
+    id,
     reviews,
     specialization,
   } = info;
+
+  function addToFav(id) {
+    if (JSON.parse(localStorage.getItem("favorites"))?.includes(id)) {
+      const index = favArray.indexOf(id);
+      favArray.splice(index, 1);
+      localStorage.setItem("favorites", JSON.stringify(favArray));
+      setHeart(!heart);
+    } else {
+      favArray.push(id);
+      localStorage.setItem("favorites", JSON.stringify(favArray));
+      setHeart(!heart);
+    }
+  }
+
+  const checked = JSON.parse(localStorage.getItem("favorites"))?.includes(id) ? { checked: true } : null;
 
   return (
     <>
@@ -67,12 +85,17 @@ const PsychologistsItem = ({ info }) => {
               </CardHeadItem>
               <CardHeadItem>
                 <CardHeadText>
-                  Price / 1 hour:{" "}
-                  <CardHeadPrice>{price_per_hour}$</CardHeadPrice>
+                  Price / 1 hour: <CardHeadPrice>{price_per_hour}$</CardHeadPrice>
                 </CardHeadText>
               </CardHeadItem>
               <CardHeadItem>
-                <CardHeadHeart type="button">
+                <CardHeadHeart
+                  type="button"
+                  $checked={checked}
+                  onClick={() => {
+                    addToFav(info.id);
+                  }}
+                >
                   <HeartSvg />
                 </CardHeadHeart>
               </CardHeadItem>

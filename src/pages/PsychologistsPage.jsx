@@ -3,10 +3,7 @@ import Filters from "../components/Filters/Filters";
 import PsychologistsList from "../components/PsychologistsList/PsychologistsList";
 import { getDatabase, ref, onValue } from "firebase/database";
 import { query, limitToFirst } from "firebase/database";
-import {
-  LoadMoreBtn,
-  LoadWrapper,
-} from "../components/PsychologistsList/PsychologistsList.styled";
+import { LoadMoreBtn, LoadWrapper } from "../components/PsychologistsList/PsychologistsList.styled";
 
 const LIMIT = 3;
 
@@ -18,10 +15,7 @@ const PsychologistsPage = () => {
   const fetchData = useCallback(() => {
     const db = getDatabase();
 
-    const countRef = query(
-      ref(db, "psychologists"),
-      limitToFirst(LIMIT * page)
-    );
+    const countRef = query(ref(db, "psychologists"), limitToFirst(LIMIT * page));
     onValue(countRef, (snapshot) => {
       const data = snapshot.val();
       setDataFromDB(data);

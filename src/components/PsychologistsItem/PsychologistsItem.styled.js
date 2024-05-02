@@ -120,6 +120,13 @@ export const CardHeadHeart = styled.button`
   background-color: transparent;
   border: none;
 
+  svg {
+    fill: ${(props) => (props.$checked ? "var(--green)" : "transparent")};
+    path {
+      stroke: ${(props) => (props.$checked ? "var(--green)" : "black")};
+    }
+  }
+
   &:hover {
     svg {
       fill: var(--green);

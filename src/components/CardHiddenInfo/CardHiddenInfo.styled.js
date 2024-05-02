@@ -12,7 +12,7 @@ export const CardHiddenBoxList = styled.ul`
     margin-bottom: 40px;
   }
 `;
-export const CardHiddenBoxItem = styled.li``;
+export const CardHiddenBoxItem = styled.li``
 export const CardHiddenBoxHead = styled.div`
   display: flex;
   align-items: center;
