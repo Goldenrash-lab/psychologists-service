@@ -10,4 +10,4 @@ const firebaseConfig = {
   databaseURL: import.meta.env.VITE_DATABASE_LOCATION,
 };
 
-const app = initializeApp(firebaseConfig);
+export const app = initializeApp(firebaseConfig);

@@ -49,12 +49,12 @@ const ModalLogin = ({ setModal }) => {
     const auth = getAuth();
     signInWithEmailAndPassword(auth, email, password)
       .then(({ user }) => {
-        // console.log(user);
         dispatch(
           login({
             user: {
               email: user.email,
               id: user.uid,
+              name: user.displayName,
             },
             token: user.accessToken,
           })
@@ -80,17 +80,12 @@ const ModalLogin = ({ setModal }) => {
           </CloseBtn>
           <ModalTitle>Log In</ModalTitle>
           <ModalText>
-            Welcome back! Please enter your credentials to access your account
-            and continue your search for a psychologist.
+            Welcome back! Please enter your credentials to access your account and continue your search for a
+            psychologist.
           </ModalText>
           <ModalForm onSubmit={handleSubmit(onSubmit)}>
             <ModalLabel>
-              <ModalInput
-                {...register("email")}
-                type="text"
-                placeholder="Email"
-                name="email"
-              />
+              <ModalInput {...register("email")} type="text" placeholder="Email" name="email" />
             </ModalLabel>
             <ModalLabel htmlFor="password">
               <ModalEyeBtn type="button" onClick={() => setEye(!eye)}>

@@ -20,7 +20,7 @@ const App = () => {
         if (user) {
           dispatch(
             current({
-              user: { email: user.email, uid: user.uid },
+              user: { email: user.email, uid: user.uid, name: user.displayName },
               token: user.accessToken,
             })
           );

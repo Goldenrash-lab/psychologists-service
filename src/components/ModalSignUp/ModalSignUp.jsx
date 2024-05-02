@@ -15,7 +15,7 @@ import CloseSvg from "../../images/modal/CloseSvg";
 import EyeOpenSvg from "../../images/modal/EyeOpenSvg";
 import EyeCloseSvg from "../../images/modal/EyeCloseSvg";
 import { useForm } from "react-hook-form";
-import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
+import { getAuth, createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
 import { useDispatch } from "react-redux";
 import { signUp } from "../../store/auth/slice";
 import { toast } from "react-toastify";
@@ -44,16 +44,25 @@ const ModalSignUp = ({ setModal }) => {
     };
   }, [setModal]);
 
-  function onSubmit({ email, password }) {
+  function onSubmit({ email, password, name }) {
     const auth = getAuth();
     createUserWithEmailAndPassword(auth, email, password)
       .then(({ user }) => {
-        console.log(user);
+        updateProfile(auth.currentUser, {
+          displayName: name,
+        })
+          .then(() => {})
+          .catch((error) => {
+            // An error occurred
+            // ...
+          });
+
         dispatch(
           signUp({
             user: {
               email: user.email,
               id: user.uid,
+              name: user.displayName,
             },
             token: user.accessToken,
           })
@@ -83,26 +92,15 @@ const ModalSignUp = ({ setModal }) => {
           </CloseBtn>
           <ModalTitle>Registration</ModalTitle>
           <ModalText>
-            Thank you for your interest in our platform! In order to register,
-            we need some information. Please provide us with the following
-            information.
+            Thank you for your interest in our platform! In order to register, we need some information. Please provide
+            us with the following information.
           </ModalText>
           <ModalForm onSubmit={handleSubmit(onSubmit)}>
             <ModalLabel>
-              <ModalInput
-                {...register("name")}
-                type="text"
-                placeholder="Name"
-                name="name"
-              />
+              <ModalInput {...register("name")} type="text" placeholder="Name" name="name" />
             </ModalLabel>
             <ModalLabel>
-              <ModalInput
-                {...register("email")}
-                type="text"
-                placeholder="Email"
-                name="email"
-              />
+              <ModalInput {...register("email")} type="text" placeholder="Email" name="email" />
             </ModalLabel>
             <ModalLabel htmlFor="password">
               <ModalEyeBtn type="button" onClick={() => setEye(!eye)}>

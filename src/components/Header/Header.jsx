@@ -51,18 +51,10 @@ const Header = ({ setModalLogin, setModalSignUp }) => {
         <HeaderBtnWrapper>
           {!user ? (
             <>
-              <LoginBtn
-                type="button"
-                aria-label="login"
-                onClick={() => setModalLogin(true)}
-              >
+              <LoginBtn type="button" aria-label="login" onClick={() => setModalLogin(true)}>
                 Log In
               </LoginBtn>
-              <RegBtn
-                type="button"
-                aria-label="registration"
-                onClick={() => setModalSignUp(true)}
-              >
+              <RegBtn type="button" aria-label="registration" onClick={() => setModalSignUp(true)}>
                 Registration
               </RegBtn>{" "}
             </>
@@ -70,13 +62,9 @@ const Header = ({ setModalLogin, setModalSignUp }) => {
             <>
               <HeaderAvatarBox>
                 <DefaultAvatarSvg />
-                <HeaderUsername>{user?.email ?? "username"}</HeaderUsername>
+                <HeaderUsername>{user?.name ?? "username"}</HeaderUsername>
               </HeaderAvatarBox>
-              <LogOutBtn
-                type="button"
-                aria-label="log out"
-                onClick={handleLogOut}
-              >
+              <LogOutBtn type="button" aria-label="log out" onClick={handleLogOut}>
                 Log Out
               </LogOutBtn>
             </>
