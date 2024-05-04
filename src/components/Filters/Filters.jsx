@@ -10,12 +10,20 @@ const options = [
   { value: "all", label: "Show all" },
 ];
 
+function getSelectOption(e) {
+  console.log("====================================");
+  console.log(e);
+  console.log("====================================");
+}
+
 const Filters = () => {
   return (
     <FiltersWrapper>
       <FilterLabel>
         Filters
         <FilterSelect
+          onChange={(choice) => getSelectOption(choice)}
+          name="filter"
           components={{
             IndicatorSeparator: () => null,
           }}
@@ -51,18 +59,12 @@ const Filters = () => {
             option: (b, s) => ({
               ...b,
               color: !s.isSelected ? "rgba(25, 26, 21, 0.3)" : "var(--black)",
-              backgroundColor: s.isFocused
-                ? "rgba(84, 190, 150, 0.2)"
-                : "var(--white)",
-              boxShadow: s.isFocused
-                ? "rgba(84, 190, 150, 0.2)"
-                : "var(--white)",
+              backgroundColor: s.isFocused ? "rgba(84, 190, 150, 0.2)" : "var(--white)",
+              boxShadow: s.isFocused ? "rgba(84, 190, 150, 0.2)" : "var(--white)",
               cursor: "pointer",
 
               ":active": {
-                backgroundColor: s.isSelected
-                  ? "rgba(84, 190, 150, 0.2)"
-                  : "rgba(84, 190, 150, 0.2)",
+                backgroundColor: s.isSelected ? "rgba(84, 190, 150, 0.2)" : "rgba(84, 190, 150, 0.2)",
               },
             }),
             menu: (styles) => ({

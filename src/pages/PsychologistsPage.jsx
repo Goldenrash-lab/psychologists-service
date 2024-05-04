@@ -1,9 +1,10 @@
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import Filters from "../components/Filters/Filters";
 import PsychologistsList from "../components/PsychologistsList/PsychologistsList";
 import { getDatabase, ref, onValue } from "firebase/database";
 import { query, limitToFirst } from "firebase/database";
 import { LoadMoreBtn, LoadWrapper } from "../components/PsychologistsList/PsychologistsList.styled";
+import { useForm } from "react-hook-form";
 
 const LIMIT = 3;
 
@@ -11,6 +12,7 @@ const PsychologistsPage = () => {
   const [dataFromDB, setDataFromDB] = useState(null);
   const [prevData, setPrevData] = useState(LIMIT);
   const [page, setPage] = useState(1);
+  const { register, handleSubmit } = useForm();
 
   const fetchData = useCallback(() => {
     const db = getDatabase();
@@ -35,7 +37,7 @@ const PsychologistsPage = () => {
 
   return (
     <>
-      <Filters />
+      <Filters register={register} />
       <PsychologistsList data={dataFromDB} />
       {prevData % dataFromDB?.length === 0 && (
         <LoadWrapper>
