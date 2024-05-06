@@ -3,13 +3,11 @@ import { Background, Container } from "./Layout.styled";
 import Header from "../Header/Header";
 import { HeaderTag } from "../Header/Header.styled";
 import ModalLogin from "../ModalLogin/ModalLogin";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import ModalSignUp from "../ModalSignUp/ModalSignUp";
-
 import { AnimatePresence, motion } from "framer-motion";
-import { getAuth } from "firebase/auth";
 
-const Layout = () => {
+export const Layout = () => {
   const location = useLocation();
 
   const [modalLogin, setModalLogin] = useState(false);
@@ -25,10 +23,7 @@ const Layout = () => {
       {location.pathname === "/" && <Background />}
       <HeaderTag>
         <Container>
-          <Header
-            setModalLogin={setModalLogin}
-            setModalSignUp={setModalSignUp}
-          />
+          <Header setModalLogin={setModalLogin} setModalSignUp={setModalSignUp} />
         </Container>
       </HeaderTag>
       <main>
@@ -39,20 +34,12 @@ const Layout = () => {
 
       <AnimatePresence>
         {modalLogin && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 0.2 }}
-          >
+          <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.2 }}>
             <ModalLogin setModal={setModalLogin} />
           </motion.div>
         )}
         {modalSignUp && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 0.2 }}
-          >
+          <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.2 }}>
             <ModalSignUp setModal={setModalSignUp} />
           </motion.div>
         )}
@@ -60,5 +47,4 @@ const Layout = () => {
     </>
   );
 };
-
 export default Layout;

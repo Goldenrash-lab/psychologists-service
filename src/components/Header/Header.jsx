@@ -1,5 +1,4 @@
-import { NavLink, useNavigate } from "react-router-dom";
-import { Container } from "../Layout/Layout.styled";
+import { useNavigate } from "react-router-dom";
 import {
   HeaderAvatarBox,
   HeaderBtnWrapper,

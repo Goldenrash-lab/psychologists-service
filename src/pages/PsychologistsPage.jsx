@@ -1,7 +1,7 @@
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import Filters from "../components/Filters/Filters";
 import PsychologistsList from "../components/PsychologistsList/PsychologistsList";
-import { getDatabase, ref, onValue } from "firebase/database";
+import { getDatabase, ref, onValue, orderByChild, orderByValue, orderByKey } from "firebase/database";
 import { query, limitToFirst } from "firebase/database";
 import { LoadMoreBtn, LoadWrapper } from "../components/PsychologistsList/PsychologistsList.styled";
 import { useForm } from "react-hook-form";
@@ -12,21 +12,36 @@ const PsychologistsPage = () => {
   const [dataFromDB, setDataFromDB] = useState(null);
   const [prevData, setPrevData] = useState(LIMIT);
   const [page, setPage] = useState(1);
-  const { register, handleSubmit } = useForm();
 
-  const fetchData = useCallback(() => {
-    const db = getDatabase();
+  const fetchData = useCallback(
+    (filter) => {
+      const db = getDatabase();
 
-    const countRef = query(ref(db, "psychologists"), limitToFirst(LIMIT * page));
-    onValue(countRef, (snapshot) => {
-      const data = snapshot.val();
-      setDataFromDB(data);
-    });
-  }, [page]);
+      const countRef = query(ref(db, "psychologists"), orderByChild("rating"), limitToFirst(LIMIT * page));
+      onValue(countRef, (snapshot) => {
+        const data = snapshot.val();
+        console.log("====================================");
+        console.log(data);
+        console.log("====================================");
+        setDataFromDB(data);
+      });
+    },
+    [page]
+  );
+
+  function checkDataFromDB(data) {
+    if (data) {
+      if (Array.isArray(data)) {
+        return data.length;
+      } else {
+        return Object.keys(data).length;
+      }
+    }
+  }
 
   useEffect(() => {
     if (page) {
-      fetchData();
+      fetchData("rating");
     }
   }, [fetchData, page]);
 
@@ -35,11 +50,17 @@ const PsychologistsPage = () => {
     setPrevData(prevData + 3);
   }
 
+  function getSelectOption(e) {
+    console.log("====================================");
+    console.log(e);
+    console.log("====================================");
+  }
+
   return (
     <>
-      <Filters register={register} />
+      <Filters filter={getSelectOption} />
       <PsychologistsList data={dataFromDB} />
-      {prevData % dataFromDB?.length === 0 && (
+      {prevData % checkDataFromDB(dataFromDB) === 0 && (
         <LoadWrapper>
           <LoadMoreBtn type="button" onClick={handleClick}>
             Load more

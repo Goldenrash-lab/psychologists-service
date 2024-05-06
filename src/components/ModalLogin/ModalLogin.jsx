@@ -49,6 +49,9 @@ const ModalLogin = ({ setModal }) => {
     const auth = getAuth();
     signInWithEmailAndPassword(auth, email, password)
       .then(({ user }) => {
+        console.log("====================================");
+        console.log("login");
+        console.log("====================================");
         dispatch(
           login({
             user: {

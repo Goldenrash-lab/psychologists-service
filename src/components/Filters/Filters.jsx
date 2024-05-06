@@ -10,19 +10,13 @@ const options = [
   { value: "all", label: "Show all" },
 ];
 
-function getSelectOption(e) {
-  console.log("====================================");
-  console.log(e);
-  console.log("====================================");
-}
-
-const Filters = () => {
+const Filters = ({ filter }) => {
   return (
     <FiltersWrapper>
       <FilterLabel>
         Filters
         <FilterSelect
-          onChange={(choice) => getSelectOption(choice)}
+          onChange={(choice) => filter(choice)}
           name="filter"
           components={{
             IndicatorSeparator: () => null,
